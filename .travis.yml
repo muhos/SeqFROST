@@ -11,4 +11,4 @@ matrix:
       dist: focal
 
 script:
-- bash install.sh -s
+- bash install.sh -t -s
