@@ -222,7 +222,7 @@ void Solver::forwardAll()
 
 	if (scheduled.size()) {
 
-		LOG2(2, " Scheduled %lld (%.2f %%) clauses for subsumption", 
+		LOG2(2, " Scheduled %lu (%.2f %%) clauses for subsumption", 
 			scheduled.size(), percent((double)scheduled.size(), (double)MAXCLAUSES));
 
 		SET_BOUNDS(forward_limit, forward, forward.checks, searchprops, 0);
