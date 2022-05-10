@@ -15,15 +15,16 @@ To install, use the `install.sh` script which has the following usage:
        -h or --help          print this usage summary
        -n or --less          print less verbose messages
        -q or --quiet         be quiet (make steps still be saved in the log)
-       -w or --wall          compile with '-Wall' flag
-       -d or --debug         compile with debugging information
-       -t or --assert        enable only code assertions
-       -p or --pedantic      compile with '-pedantic' flag
+	   -c or --clean         remove old installation
+	   -t or --assert        enable only code assertions
        -l or --logging       enable logging (needed for verbosity level > 2)
        -s or --statistics    enable costly statistics (may impact runtime)
        -a or --all           enable all above flags except 'assert'
-       --clean=<target>      remove old installation of <cpu | gpu | all> solvers
-       --standard=<n>        compile with <11 | 14 | 17 > c++ standard
+	   -w or --wall          compile with '-Wall' flag
+	   -f or --fast          compile with '-use_fast_math' flag
+       -d or --debug         compile with debugging information
+       -p or --pedantic      compile with '-pedantic' flag
+       --standard=<n>        compile with <11 | 14 | 17> c++ standard
        --extra="flags"       pass extra "flags" to the compiler(s)
 
 

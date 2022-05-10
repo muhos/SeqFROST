@@ -22,15 +22,15 @@ $ch	-h or --help          print this usage summary
 $ch	-n or --less          print less verbose messages
 $ch	-q or --quiet         be quiet (make steps still be saved in the log)
 $ch	-c or --clean         remove old installation
-$ch	-f or --fast          compile with '-use_fast_math' flag
-$ch	-w or --wall          compile with '-Wall' flag
-$ch	-d or --debug         compile with debugging information
 $ch	-t or --assert        enable only code assertions
-$ch	-p or --pedantic      compile with '-pedantic' flag
 $ch	-l or --logging       enable logging (needed for verbosity level > 2)
 $ch	-s or --statistics    enable costly statistics (may impact runtime)
 $ch	-a or --all           enable all above flags except 'debug', 'clean' and 'verbosity'
-$ch	--standard=<n>        compile with <11 | 14 | 17 > c++ standard
+$ch	-p or --pedantic      compile with '-pedantic' flag
+$ch	-f or --fast          compile with '-use_fast_math' flag
+$ch	-w or --wall          compile with '-Wall' flag
+$ch	-d or --debug         compile with debugging information
+$ch	--standard=<n>        compile with <11 | 14 | 17> c++ standard
 $ch	--extra="flags"       pass extra "flags" to the compiler(s)
 EOF
 printf "+%${lineWidth}s+\n" |tr ' ' '-'
