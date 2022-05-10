@@ -1,0 +1,14 @@
+language: c++
+
+sudo: enabled
+
+matrix:
+  include:
+    - name: SEQ
+      env:
+      - UBUNTU_ARCH=x86_64
+      - UBUNTU_VERSION=ubuntu2004
+      dist: focal
+
+script:
+- bash install.sh -s
