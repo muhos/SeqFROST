@@ -34,7 +34,7 @@ namespace SeqFROST {
 			uint32 decisions, unassigned;
 			int rounds;
 		} mdm;
-		struct { uint64 reduces; } inprocess, probe;
+		struct { uint64 reduces; } simplify, probe;
 		struct { uint64 resolvents; } ternary;
 		struct { uint32 literals; } transitive;
 		struct { int64 removed; } shrink;
@@ -48,7 +48,7 @@ namespace SeqFROST {
 		uint64 reduce;
 		uint64 rephase;
 		uint64 forward;
-		uint64 inprocess;
+		uint64 simplify;
 		struct { uint64 ticks, conflicts; } mode;
 		struct { uint64 conflicts; } restart;
 		int keptsize, keptlbd;
@@ -59,7 +59,7 @@ namespace SeqFROST {
 	struct MONITOR { uint32 now, all; };
 
 	struct SLEEP {
-		MONITOR inprocess, probe, ternary, autarky, debinary;
+		MONITOR simplify, probe, ternary, autarky, debinary;
 		SLEEP() { RESETSTRUCT(this); }
 	};
 

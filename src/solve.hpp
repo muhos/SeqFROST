@@ -194,13 +194,13 @@ namespace SeqFROST {
 		inline void		interrupt			() { 
 			interrupted = true;
 		}	
-		inline bool		canSigmify			() {
-			if (!opts.inprocess_en) return false;
+		inline bool		canSimplify			() {
+			if (!opts.simplify_en) return false;
 			if (!ORIGINALS) return false;
-			if (last.inprocess.reduces > stats.reduces) return false;
-			if (limit.inprocess > stats.conflicts) return false;
-			if (sp->simplified >= opts.inprocess_min) return true;
-			return ((stats.shrunken - last.shrink.removed) > (opts.inprocess_min << 4));
+			if (last.simplify.reduces > stats.reduces) return false;
+			if (limit.simplify > stats.conflicts) return false;
+			if (sp->simplified >= opts.simplify_min) return true;
+			return ((stats.shrunken - last.shrink.removed) > (opts.simplify_min << 4));
 		}
 		inline bool		canMMD				() 
 		{
@@ -749,8 +749,8 @@ namespace SeqFROST {
 		void			createOT			(const bool& reset = true);
 		void			newBeginning		();
 		void			shrinkSimp			();
-		void			sigmifying			();
-		void			sigmify				();
+		void			simplifying			();
+		void			simplify			();
 		void			awaken				();
 		bool			LCVE				();
 		bool			prop				();

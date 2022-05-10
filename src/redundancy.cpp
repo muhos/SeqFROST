@@ -33,7 +33,7 @@ void Solver::ERE()
 	const int maxoccurs = opts.ere_max_occurs;
 	const int maxsize = opts.ere_clause_max;
 #ifdef STATISTICS
-	ERESTATS& erestats = stats.inprocess.ere;
+	ERESTATS& erestats = stats.simplify.ere;
 #endif
 	Lits_t merged;
 	merged.reserve(maxsize);

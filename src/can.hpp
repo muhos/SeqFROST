@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace SeqFROST {
 
-	#define canPreSigmify() (opts.preprocess_en)
+	#define canPreSimplify() (opts.preprocess_en)
 
 	#define canRephase() (opts.rephase_en	&& \
 						  stats.conflicts > limit.rephase)

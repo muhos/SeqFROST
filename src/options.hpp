@@ -35,7 +35,7 @@ namespace SeqFROST {
 		//------------------------------------------//
 		int64	learntsub_max;
 		//------------------------------------------//
-		int64	inprocess_min, inprocess_inc;
+		int64	simplify_min, simplify_inc;
 		uint64	conflict_out, decision_out;
 		//------------------------------------------//
 		double	var_inc, var_decay;
@@ -60,7 +60,7 @@ namespace SeqFROST {
 		int		rephase_inc;
 		int		decompose_min;
 		int		decompose_min_eff;
-		int		inprocess_priorbins;
+		int		simplify_priorbins;
 		int		minimize_depth;
 		int		minimize_min;
 		int		minimize_lbd;
@@ -112,7 +112,7 @@ namespace SeqFROST {
 		bool	solve_en;
 		bool	profile_simplifier;
 		bool	aggr_cnf_sort;
-		bool	preprocess_en, inprocess_en, inprocess_sleep_en;
+		bool	preprocess_en, simplify_en, simplify_sleep_en;
 		bool	ve_en, ve_plus_en, ve_lbound_en, ve_fun_en;
 		//------------------------------------------//
 		int		phases;

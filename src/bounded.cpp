@@ -34,10 +34,10 @@ void Solver::VE()
 	out_c.reserve(opts.ve_clause_max);
 
 #ifdef STATISTICS
-	BVESTATS& bvestats = stats.inprocess.bve;
+	BVESTATS& bvestats = stats.simplify.bve;
 #endif
 
-	const bool firstcall = stats.inprocess.calls == 1;
+	const bool firstcall = stats.simplify.calls == 1;
 	forall_vector(uint32, elected, i) {
 		uint32 v = *i;
 		CHECKVAR(v);
@@ -53,7 +53,7 @@ void Solver::VE()
 			nOrgs = negs.size();
 		}
 		else {
-			assert(stats.inprocess.calls > 1);
+			assert(stats.simplify.calls > 1);
 			countOrgs(scnf, poss, pOrgs);
 			countOrgs(scnf, negs, nOrgs);
 		}

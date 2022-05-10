@@ -38,7 +38,7 @@ INT_OPT opt_lcve_max_occurs("electionsmax", "maximum occurrence list size to che
 INT_OPT opt_lcve_clause_max("electionsclausemax", "maximum clause size to check in LCVE", 3e4, INT32R(1, INT32_MAX));
 INT_OPT opt_bce_max_occurs("blockedmaxoccurs", "maximum occurrence list size to scan in BCE", 1e3, INT32R(100, INT32_MAX));
 INT_OPT opt_collect_freq("collectfrequency", "set the frequency of CNF memory shrinkage in the simplifier", 2, INT32R(0, 5));
-INT_OPT opt_ere_extend("redundancyextend", "extend ERE with clause strengthening (0: no extend, 1: originals, 2: all)", 2, INT32R(0, 3));
+INT_OPT opt_ere_extend("redundancyextend", "extend ERE with clause strengthening (0: no extend, 1: originals, 2: all)", 1, INT32R(0, 3));
 INT_OPT opt_ere_max_occurs("redundancymaxoccurs", "maximum occurrence list size to scan in ERE", 1e3, INT32R(100, INT32_MAX));
 INT_OPT opt_ere_clause_max("redundancyclausemax", "maximum resolvent size for forward check in ERE", 200, INT32R(2, INT32_MAX));
 INT_OPT opt_sub_max_occurs("subsumemaxoccurs", "maximum occurrence list size to scan in SUB", 1e3, INT32R(100, INT32_MAX));
@@ -87,8 +87,8 @@ BOOL_OPT opt_report_en("report", "allow performance report on stdout", true);
 BOOL_OPT opt_rephase_en("rephase", "enable variable rephasing", true);
 BOOL_OPT opt_reduce_en("reduce", "enable learnt database reduction", true);
 BOOL_OPT opt_preprocess_en("preprocess", "enable preprocessing using CPU-like SIGmA", true);
-BOOL_OPT opt_inprocess_en("inprocess", "enable inprocessing using CPU-like SIGmA", true);
-BOOL_OPT opt_inprocess_sleep_en("inprocesssleep", "allow inprocessing to sleep", true);
+BOOL_OPT opt_simplify_en("simplify", "enable live simplifications using CPU-like SIGmA", true);
+BOOL_OPT opt_simplify_sleep_en("simplifysleep", "allow live simplifications to sleep", true);
 BOOL_OPT opt_forward_en("forward", "enable forward subsumption elimination", true);
 BOOL_OPT opt_vivify_en("vivify", "enable vivification", true);
 
@@ -114,9 +114,9 @@ INT_OPT opt_ternary_rel_eff("ternaryreleff", "relative hyper ternary resolution 
 INT_OPT opt_transitive_max_eff("transitivemaxeff", "maximum transitive efficiency", 1e2, INT32R(0, INT32_MAX));
 INT_OPT opt_transitive_min_eff("transitivemineff", "minimum transitive efficiency", 1e6, INT32R(0, INT32_MAX));
 INT_OPT opt_transitive_rel_eff("transitivereleff", "relative transitive efficiency per mille", 20, INT32R(0, 1000));
-INT_OPT opt_inprocess_inc("inprocessinc", "inprocessing increment value based on conflicts", 500, INT32R(1, INT32_MAX));
-INT_OPT opt_inprocess_min("inprocessmin", "minimum root variables shrunken to awaken inprocessing", 4e3, INT32R(1, INT32_MAX));
-INT_OPT opt_inprocess_priorbins("inprocesspriorbins", "prioritize binaries in watch table after sigmification (1: enable, 2: prioritize learnts)", 1, INT32R(0, 2));
+INT_OPT opt_simplify_inc("simplifyinc", "simplifying increment value based on conflicts", 500, INT32R(1, INT32_MAX));
+INT_OPT opt_simplify_min("simplifymin", "minimum root variables shrunken to awaken live simplifications", 4e3, INT32R(1, INT32_MAX));
+INT_OPT opt_simplify_priorbins("simplifypriorbins", "prioritize binaries in watch table after sigmification (1: enable, 2: prioritize learnts)", 1, INT32R(0, 2));
 INT_OPT opt_restart_inc("restartinc", "restart increment value based on conflicts", 1, INT32R(1, INT32_MAX));
 INT_OPT opt_reduce_inc("reduceinc", "increment value of clauses reduction based on conflicts", 300, INT32R(10, INT32_MAX));
 INT_OPT opt_rephase_inc("rephaseinc", "rephasing increment value based on conflicts", 600, INT32R(100, INT32_MAX));
@@ -281,11 +281,11 @@ void OPTION::init()
 	stable				= opt_stable;
 	stable_rate			= opt_stable_rate;
 	preprocess_en		= opt_preprocess_en;
-	inprocess_en		= opt_inprocess_en;
-	inprocess_sleep_en	= opt_inprocess_sleep_en;
-	inprocess_inc		= opt_inprocess_inc;
-	inprocess_min		= opt_inprocess_min;
-	inprocess_priorbins	= opt_inprocess_priorbins;
+	simplify_en		    = opt_simplify_en;
+	simplify_sleep_en	= opt_simplify_sleep_en;
+	simplify_inc		= opt_simplify_inc;
+	simplify_min		= opt_simplify_min;
+	simplify_priorbins	= opt_simplify_priorbins;
 	forward_en			= opt_forward_en;
 	forward_inc			= opt_forward_inc;
 	forward_priorbins	= opt_forward_priorbins;
@@ -312,7 +312,7 @@ void OPTION::init()
 		model_en = true, modelprint_en = true, modelverify_en = false;
 	}
 	// initialize simplifier options
-	if (preprocess_en || inprocess_en) {
+	if (preprocess_en || simplify_en) {
 		all_en				= opt_all_en;
 		ve_en				= opt_ve_en || opt_ve_plus_en;
 		ve_plus_en			= opt_ve_plus_en;

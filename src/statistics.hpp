@@ -99,7 +99,7 @@ namespace SeqFROST {
 			uint64 checks, vivified, implied, subsumed, strengthened;
 		} vivify;
 
-		SIGMASTATS inprocess;
+		SIGMASTATS simplify;
 		uint64 searchprops;
 		uint64 searchticks;
 		uint64 probeticks;

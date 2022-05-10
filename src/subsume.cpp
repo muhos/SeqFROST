@@ -28,7 +28,7 @@ void Solver::SUB()
 		if (opts.profile_simplifier) timer.pstart();
 		const int maxoccurs = opts.sub_max_occurs;
 		const int clausemax = opts.sub_clause_max;
-		SUBSTATS& substats = stats.inprocess.sub;
+		SUBSTATS& substats = stats.simplify.sub;
 		forall_vector(uint32, elected, i) {
 			CHECKVAR(*i);
 			assert(!sp->state[*i].state);

@@ -26,7 +26,7 @@ void Solver::report()
 		LOG0("");
 		LOGHEADLINE(Statistics, CREPORT);
 		LOG0("");
-		if (opts.preprocess_en || opts.inprocess_en) {
+		if (opts.preprocess_en || opts.simplify_en) {
 			LOG1("\t\t\t%sSimplifier Report%s", CREPORT, CNORMAL);
 			if (!opts.profile_simplifier)
 				LOG1(" %sSimplifier time          : %s%.3f  seconds%s", CREPORT, CREPORTVAL, timer.simplify, CNORMAL);
@@ -41,31 +41,31 @@ void Solver::report()
 				LOG1(" %s - BCE                   : %s%-16.2f  ms%s", CREPORT, CREPORTVAL, timer.bce, CNORMAL);
 				LOG1(" %s - ERE                   : %s%-16.2f  ms%s", CREPORT, CREPORTVAL, timer.ere, CNORMAL);
 			}
-			LOG1(" %sSimplification calls     : %s%-10d%s", CREPORT, CREPORTVAL, stats.inprocess.calls, CNORMAL);
+			LOG1(" %sSimplification calls     : %s%-10d%s", CREPORT, CREPORTVAL, stats.simplify.calls, CNORMAL);
 #ifdef STATISTICS
-			LOG1(" %s Removed variables       : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.all.variables + stats.units.forced, CNORMAL);
-			LOG1(" %s  Resolutions            : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.bve.resolutions, CNORMAL);
+			LOG1(" %s Removed variables       : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.all.variables + stats.units.forced, CNORMAL);
+			LOG1(" %s  Resolutions            : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.bve.resolutions, CNORMAL);
 			LOG1(" %s  Forced units           : %s%-10d%s", CREPORT, CREPORTVAL, stats.units.forced, CNORMAL);
-			LOG1(" %s  Pure literals          : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.bve.pures, CNORMAL);
-			LOG1(" %s  If-Then-Else           : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.bve.ites, CNORMAL);
-			LOG1(" %s  Inverter               : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.bve.inverters, CNORMAL);
-			LOG1(" %s  AND-OR                 : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.bve.andors, CNORMAL);
-			LOG1(" %s  Fun                    : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.bve.funs, CNORMAL);
-			LOG1(" %s  XOR                    : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.bve.xors, CNORMAL);
-			LOG1(" %s Removed clauses         : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.all.clauses, CNORMAL);
-			LOG1(" %s  Subsumed               : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.sub.subsumed, CNORMAL);
-			LOG1(" %s  Strengthened           : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.sub.strengthened, CNORMAL);
-			LOG1(" %s Tried redundancies      : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.ere.tried, CNORMAL);
-			LOG1(" %s  Original removed       : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.ere.orgremoved, CNORMAL);
-			LOG1(" %s  Original strengthened  : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.ere.orgstrengthened, CNORMAL);
-			LOG1(" %s  Learnt removed         : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.ere.learntremoved, CNORMAL);
-			LOG1(" %s  Learnt strengthened    : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.ere.learntstrengthened, CNORMAL);
-			LOG1(" %s Removed literals        : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.all.literals, CNORMAL);
+			LOG1(" %s  Pure literals          : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.bve.pures, CNORMAL);
+			LOG1(" %s  If-Then-Else           : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.bve.ites, CNORMAL);
+			LOG1(" %s  Inverter               : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.bve.inverters, CNORMAL);
+			LOG1(" %s  AND-OR                 : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.bve.andors, CNORMAL);
+			LOG1(" %s  Fun                    : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.bve.funs, CNORMAL);
+			LOG1(" %s  XOR                    : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.bve.xors, CNORMAL);
+			LOG1(" %s Removed clauses         : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.all.clauses, CNORMAL);
+			LOG1(" %s  Subsumed               : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.sub.subsumed, CNORMAL);
+			LOG1(" %s  Strengthened           : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.sub.strengthened, CNORMAL);
+			LOG1(" %s Tried redundancies      : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.ere.tried, CNORMAL);
+			LOG1(" %s  Original removed       : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.ere.orgremoved, CNORMAL);
+			LOG1(" %s  Original strengthened  : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.ere.orgstrengthened, CNORMAL);
+			LOG1(" %s  Learnt removed         : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.ere.learntremoved, CNORMAL);
+			LOG1(" %s  Learnt strengthened    : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.ere.learntstrengthened, CNORMAL);
+			LOG1(" %s Removed literals        : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.all.literals, CNORMAL);
 #else
-			LOG1(" %sRemoved variables       : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.all.variables + stats.units.forced, CNORMAL);
+			LOG1(" %sRemoved variables       : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.all.variables + stats.units.forced, CNORMAL);
 			LOG1(" %s Forced units           : %s%-10d%s", CREPORT, CREPORTVAL, stats.units.forced, CNORMAL);
-			LOG1(" %sRemoved clauses         : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.all.clauses, CNORMAL);
-			LOG1(" %sRemoved literals        : %s%-16lld%s", CREPORT, CREPORTVAL, stats.inprocess.all.literals, CNORMAL);
+			LOG1(" %sRemoved clauses         : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.all.clauses, CNORMAL);
+			LOG1(" %sRemoved literals        : %s%-16lld%s", CREPORT, CREPORTVAL, stats.simplify.all.literals, CNORMAL);
 #endif
 		}
 		LOG1("\t\t\t%sSolver Report%s", CREPORT, CNORMAL);

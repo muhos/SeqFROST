@@ -141,7 +141,7 @@ void Solver::initLimits()
 	INIT_LIMIT(limit.rephase, opts.rephase_inc, false);
 	INIT_LIMIT(limit.mdm, opts.mdm_inc, true);
 	INIT_LIMIT(limit.probe, opts.probe_inc, true);
-	INIT_LIMIT(limit.inprocess, opts.inprocess_inc, true);
+	INIT_LIMIT(limit.simplify, opts.simplify_inc, true);
 	INIT_LIMIT(limit.forward, opts.forward_inc, true);
 
 	if (opts.mdm_rounds) {
@@ -158,7 +158,7 @@ void Solver::solve()
 	timer.start();
 	initLimits();
 	if (verbose == 1) printTable();
-	if (canPreSigmify()) sigmify();
+	if (canPreSimplify()) simplify();
 	if (UNSOLVED) {
 		LOG2(2, "-- CDCL search started..");
 		MDMInit();
@@ -168,7 +168,7 @@ void Solver::solve()
 			else if (canReduce()) reduce();
 			else if (canRestart()) restart();
 			else if (canRephase()) rephase();
-			else if (canSigmify()) sigmify();
+			else if (canSimplify()) simplify();
 			else if (canProbe()) probe();
 			else if (canMMD()) MDM();
 			else decide();
@@ -182,12 +182,9 @@ void Solver::solve()
 
 void Solver::wrapup() 
 {
-	if (!quiet_en) { 
-		LOGHEADLINE(Result, CREPORT);
-		LOG0(""); 
-	}
+	if (!quiet_en) LOGHEADLINE(Result, CREPORT);
 	if (quiet_en && opts.time_quiet_en) 
-		LOG1("CPU Time: %.3f  sec", timer.solve + timer.simplify);
+		LOG1("CPU time: %.3f  sec", timer.solve + timer.simplify);
 	if (SAT) {
 		LOGSAT("SATISFIABLE");
 		assert(sp != NULL && sp->value != NULL);

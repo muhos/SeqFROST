@@ -90,7 +90,7 @@ void Solver::isolve(Lits_t& assumptions)
 		initLimits();
 		iassume(assumptions);
 		if (verbose == 1) printTable();
-		if (canPreSigmify()) sigmify();
+		if (canPreSimplify()) simplify();
 		if (UNSOLVED) {
 			LOG2(2, "-- Incremental CDCL search started..");
 			MDMInit();
@@ -100,7 +100,7 @@ void Solver::isolve(Lits_t& assumptions)
 				else if (canReduce()) reduce();
 				else if (canRestart()) restart();
 				else if (canRephase()) rephase();
-				else if (canSigmify()) sigmify();
+				else if (canSimplify()) simplify();
 				else if (canProbe()) probe();
 				else if (canMMD()) MDM();
 				else idecide();

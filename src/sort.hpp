@@ -37,7 +37,7 @@ namespace SeqFROST {
 #if defined(STDSORTSTB)
 	#define STABLESORT(PTR, END, LEN, CMP) std::stable_sort((PTR), (END), (CMP))
 #else 
-	#define STABLESORT(PTR, END, LEN, CMP) wolfsort((PTR), (LEN), (CMP))
+	#define STABLESORT(PTR, END, LEN, CMP) quadsort((PTR), (LEN), (CMP))
 #endif
 
 

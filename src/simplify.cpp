@@ -29,7 +29,7 @@ inline bool	Solver::checkMem(const string& name, const size_t& size)
 {
 	const size_t sysMemCons = size_t(sysMemUsed()) + size;
 	if (sysMemCons > size_t(stats.sysmem)) { // to catch memout problems before exception does
-		LOGWARN("not enough memory for %s (free: %lld, used: %zd), inprocessing will terminate",
+		LOGWARN("not enough memory for %s (free: %lld, used: %zd), simplify will terminate",
 			name.c_str(), stats.sysmem / MBYTE, sysMemCons / MBYTE);
 		return false;
 	}
@@ -99,16 +99,16 @@ void Solver::sortOT()
 	if (opts.profile_simplifier) timer.pstop(), timer.sot += timer.pcpuTime();
 }
 
-void Solver::sigmify()
+void Solver::simplify()
 {
 	if (!opts.phases && !(opts.all_en || opts.ere_en)) return;
 	assert(conflict == UNDEF_REF);
 	assert(UNSOLVED);
 	assert(ORIGINALS);
-	stats.inprocess.calls++;
-	sigmifying();
-	INCREASE_LIMIT(inprocess, stats.inprocess.calls, nlognlogn, true);
-	last.inprocess.reduces = stats.reduces + 1;
+	stats.simplify.calls++;
+	simplifying();
+	INCREASE_LIMIT(simplify, stats.simplify.calls, nlognlogn, true);
+	last.simplify.reduces = stats.reduces + 1;
 	if (opts.phases > 2) {
 		opts.phases--;
 		LOG2(2, "  sigmify phases decreased to %d", opts.phases);
@@ -152,12 +152,12 @@ void Solver::awaken()
 	return;
 }
 
-void Solver::sigmifying()
+void Solver::simplifying()
 {
 	/********************************/
-	/*       awaken inprocess       */
+	/*        awaken simplify       */
 	/********************************/
-	SLEEPING(sleep.inprocess, opts.inprocess_sleep_en);
+	SLEEPING(sleep.simplify, opts.simplify_sleep_en);
 	rootify();
 	shrinkTop(false);
 	if (orgs.empty()) {
@@ -210,9 +210,9 @@ void Solver::sigmifying()
 	shrinkSimp();
 	assert(inf.nClauses == scnf.size());
 	bool success = (bliterals != inf.nLiterals);
-	stats.inprocess.all.variables += int64(inf.maxMelted) - bmelted;
-	stats.inprocess.all.clauses += bclauses - int64(inf.nClauses);
-	stats.inprocess.all.literals += bliterals - int64(inf.nLiterals);
+	stats.simplify.all.variables += int64(inf.maxMelted) - bmelted;
+	stats.simplify.all.clauses += bclauses - int64(inf.nClauses);
+	stats.simplify.all.literals += bliterals - int64(inf.nLiterals);
 	last.shrink.removed = stats.shrunken;
 	if (inf.maxFrozen > sp->simplified) stats.units.forced += inf.maxFrozen - sp->simplified;
 	if (!inf.unassigned || !inf.nClauses) { 
@@ -223,9 +223,9 @@ void Solver::sigmifying()
 	}
 	if (canMap()) map(true); 
 	else newBeginning();
-	rebuildWT(opts.inprocess_priorbins);
+	rebuildWT(opts.simplify_priorbins);
 	if (retrail()) LOG2(2, " Propagation after sigmify proved a contradiction");
-	UPDATE_SLEEPER(inprocess, success);
+	UPDATE_SLEEPER(simplify, success);
 	printStats(1, 's', CGREEN);
 	if (!opts.profile_simplifier) timer.stop(), timer.simplify += timer.cpuTime();
 	if (!opts.solve_en) killSolver();
@@ -248,7 +248,7 @@ void Solver::shrinkSimp()
 
 void Solver::newBeginning() 
 {
-	assert(opts.preprocess_en || opts.inprocess_en);
+	assert(opts.preprocess_en || opts.simplify_en);
 	assert(wt.empty());
 	assert(orgs.empty());
 	assert(learnts.empty());

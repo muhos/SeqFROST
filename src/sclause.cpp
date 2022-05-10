@@ -26,7 +26,7 @@ void Solver::addClause(SCLAUSE& src)
 	assert(!src.deleted());
 	assert(!src.molten());	
 	// NOTE: 'src' should be used before any mapping is done
-	if (stats.inprocess.calls > 1 && src.added()) {
+	if (stats.simplify.calls > 1 && src.added()) {
 		mark_ssubsume(src);
 	}
 	C_REF r = UNDEF_REF;
