@@ -19,11 +19,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "solve.hpp"
 using namespace SeqFROST;
 
-void Solver::transiting(const uint32& src, const uint64& limit, uint64& removed, uint32& units)
-{
-
-}
-
 void Solver::transitive()
 {
 	if (UNSAT) return;
