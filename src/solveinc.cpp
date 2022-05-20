@@ -41,7 +41,7 @@ Solver::Solver() :
 	, simpstate(AWAKEN_SUCC)
 	, mapped(false)
 {
-	LOGTITLE("Solver (Sequential Formal Reasoning On Satisfiability)", version());
+	LOGTITLE("SeqFROST (Sequential Formal Reasoning On Satisfiability)", version());
 	getCPUInfo(stats.sysmem);
 	getBuildInfo();
 	initSolver();
