@@ -2,7 +2,7 @@
 [![Build Status](https://app.travis-ci.com/muhos/SeqFROST.svg?token=YXUywHfBSpqMqyUKnyT4&branch=main)](https://app.travis-ci.com/muhos/SeqFROST)
 
 # SeqFROST
-SeqFROST stands for Sequential Formal Reasoning On SaTisfiability. 
+SeqFROST stands for Sequential Formal ReasOning about SaTisfiability. 
 It is a sequential SAT solver with inprocessing based on our simplifications engine in GPU SAT solver [ParaFROST](https://github.com/muhos/ParaFROST). Unlike ParaFROST, this solver runs completely single-threaded on the CPU with different solving heuristics. SeqFROST also won the first place in Main Track of SAT Competition 2022 on SAT instances.
 
 # Install
