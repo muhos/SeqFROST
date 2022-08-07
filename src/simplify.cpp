@@ -111,7 +111,7 @@ void Solver::simplify()
 	last.simplify.reduces = stats.reduces + 1;
 	if (opts.phases > 2) {
 		opts.phases--;
-		LOG2(2, "  sigmify phases decreased to %d", opts.phases);
+		LOG2(2, "  simplify phases decreased to %d", opts.phases);
 	}
 }
 
@@ -224,7 +224,7 @@ void Solver::simplifying()
 	if (canMap()) map(true); 
 	else newBeginning();
 	rebuildWT(opts.simplify_priorbins);
-	if (retrail()) LOG2(2, " Propagation after sigmify proved a contradiction");
+	if (retrail()) LOG2(2, " Propagation after simplify proved a contradiction");
 	UPDATE_SLEEPER(simplify, success);
 	printStats(1, 's', CGREEN);
 	if (!opts.profile_simplifier) timer.stop(), timer.simplify += timer.cpuTime();

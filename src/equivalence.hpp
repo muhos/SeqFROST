@@ -55,13 +55,14 @@ inline uint32 substitute_single(const uint32& dx, SCLAUSE& org, const uint32& de
 	return 0;
 }
 
-inline bool substitute_single(const uint32& p, const uint32& def, SCNF& scnf, OT& ot)
+inline bool substitute_single(const uint32& p, const uint32& n, const uint32& def, SCNF& scnf, OL& poss, OL& negs)
 {
 	CHECKLIT(def);
 	assert(!SIGN(p));
-	const uint32 n = NEG(p), def_f = FLIP(def);
-	OL& poss = ot[p], & negs = ot[n];
+
+	const uint32 def_f = FLIP(def);
 	const bool proofEN = solver->opts.proof_en;
+
 	// substitute negatives 
 	forall_occurs(negs, i) {
 		SCLAUSE& neg = scnf[*i];
@@ -127,7 +128,7 @@ inline uint32 find_BN_gate(const uint32& p, const uint32& n, SCNF& scnf, OL& pos
 
 	if (scnf[*poss].size() > 2 ||
 		scnf[*negs].size() > 2) {
-		return false;
+		return 0;
 	}
 
 	assert(checkMolten(scnf, poss, negs));

@@ -71,7 +71,10 @@ namespace SeqFROST {
 	public:
 
 		QUEUE() : 
-			_bumped(0)
+			links(NULL)
+			, sz(0)
+			, cap(0)
+			, _bumped(0)
 			, _first(0)
 			, _last(0)
 			, _free(0) 

@@ -542,6 +542,7 @@ namespace SeqFROST {
 		uint32			propAutarky			(const LIT_ST* values, LIT_ST* autarkies);
 		void			vivifying			(const CL_ST& type);
 		void			ternarying			(const uint64& resolvents_limit, const uint64& checks_limit);
+		void			transiting			(const uint32& src, const uint64& limit, uint64& removed, uint32& units);
 		void			ternaryResolve		(const uint32& p, const uint64& limit);
 		void			subsumeLearnt		(const C_REF& lref);
 		uint32			makeAssign			(const uint32& v, const bool& tphase = false);

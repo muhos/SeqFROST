@@ -71,7 +71,7 @@ void Solver::VE()
 			bvestats.inverters++;
 #endif
 			save_BN_gate(p, pOrgs, nOrgs, scnf, poss, negs, model);
-			if (substitute_single(p, def, scnf, ot)) {
+			if (substitute_single(p, n, def, scnf, poss, negs)) {
 				LOG2(2, "  BVE proved a contradiction");
 				learnEmpty();
 				killSolver();

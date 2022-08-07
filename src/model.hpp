@@ -25,9 +25,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace SeqFROST {
 
 	struct MODEL {
+		LIT_ST* orgvalues;
 		Vec<LIT_ST> value, marks;
 		uVec1D lits, resolved;
-		LIT_ST* orgvalues;
 		uint32 *vorg, maxVar, orgVars, orgClauses, orgLiterals;
 		bool extended, verified;
 		MODEL() :

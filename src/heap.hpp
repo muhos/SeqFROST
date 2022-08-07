@@ -158,16 +158,20 @@ namespace SeqFROST {
 		HEAP(const CMP& _cmp) :
 			heap(NULL)
 			, heapsize(0)
+			, heapcap(0)
 			, pos(NULL)
 			, possize(0)
+			, poscap(0)
 			, cmp(_cmp)
 		{ }
 
 		HEAP() :
 			heap(NULL)
 			, heapsize(0)
+			, heapcap(0)
 			, pos(NULL)
 			, possize(0)
+			, poscap(0)
 		{ }
 
 		~HEAP() { destroy(); }

@@ -38,7 +38,7 @@ namespace SeqFROST {
 
 	struct LEARNTLIT {
 		uint32 lit, idx;
-		LEARNTLIT() {}
+		LEARNTLIT() : lit(0), idx(0) {}
 		LEARNTLIT(const uint32& lit, const uint32& idx) :
 			lit(lit), idx(idx) {}
 	};

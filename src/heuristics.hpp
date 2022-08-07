@@ -149,6 +149,8 @@ namespace SeqFROST {
 			, decisions(0)
 			, ucb_0(0)
 			, ucb_1(0)
+			, reward{ 0, 0 }
+			, select{ 0, 0 }
 			, chosen(0)
 		{
 			assert(ARMS == 2);

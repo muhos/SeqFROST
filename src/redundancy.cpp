@@ -95,7 +95,7 @@ void Solver::ERE()
 								LOGCLAUSE(4, c, " By merged");	
                                 break;
                             }
-                            else if (ereextend) { // can be strengthened
+                            else if (!equal && ereextend) { // can be strengthened
 								if (learnt && ereextend == 1) continue;
                                 LOGCLAUSE(4, c, " Strengthened");	
 							#ifdef STATISTICS

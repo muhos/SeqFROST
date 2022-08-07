@@ -81,7 +81,17 @@ namespace SeqFROST {
         bool restart, limited;
 
     public:
-        LUBYREST() : period(0), restart(false) {}
+
+        LUBYREST() : 
+            u(0)
+            , v(0)
+            , limit(0)
+            , period(0)
+            , countdown(0)
+            , restart(false)
+            , limited(false) 
+        {}
+
         void enable(uint64 period, uint64 limit) {
             if (limit && period > limit) period = limit;
             this->period = period;

@@ -42,7 +42,7 @@ namespace SeqFROST {
     struct CSIZE {
         C_REF ref;
         uint32 size;
-        inline CSIZE() {}
+        inline CSIZE() : ref(0), size(0) {}
         inline CSIZE(const C_REF& ref, const uint32& size) : ref(ref), size(size) { }
     };
 

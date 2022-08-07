@@ -52,6 +52,7 @@ void Solver::iallocSpace()
 	imarks.clear(true);
 	if (sp->size() == size_t(inf.maxVar) + 1) return; // avoid allocation if 'maxVar' didn't change
 	assert(inf.maxVar);
+	LOGN2(2, " Allocating fixed memory for %d variables..", inf.maxVar);
 	assert(inf.orgVars == inf.maxVar);
 	assert(vorg.size() == inf.maxVar + 1);
 	assert(V2L(inf.maxVar + 1) == inf.nDualVars);
@@ -59,10 +60,10 @@ void Solver::iallocSpace()
 	assert(ilevel.size() == ivstate.size());
 	assert(ilevel.size() == inf.maxVar + 1);
 	assert(imarks.empty());
+	inf.orgCls = orgs.size();
 	vorg[0] = 0;
 	model.lits[0] = 0;
 	model.init(vorg);
-	LOGN2(2, " Allocating fixed memory for %d variables..", inf.maxVar);
 	SP* newSP = new SP(inf.maxVar + 1, opts.polarity);
 	newSP->copyFrom(sp);
 	delete sp;
