@@ -3,7 +3,7 @@
 
 # SeqFROST
 SeqFROST stands for Sequential Formal Reasoning On SaTisfiability. 
-It is a sequential SAT solver with inprocessing based on our GPU SAT solver [ParaFROST](https://github.com/muhos/ParaFROST). Unlike ParaFROST, this solver runs completely single-threaded on the CPU. SeqFROST also won the first place in Main Track of SAT Competition 2022 on SAT instances.
+It is a sequential SAT solver with inprocessing based on our simplifications engine in GPU SAT solver [ParaFROST](https://github.com/muhos/ParaFROST). Unlike ParaFROST, this solver runs completely single-threaded on the CPU with different solving heuristics. SeqFROST also won the first place in Main Track of SAT Competition 2022 on SAT instances.
 
 # Install
 
