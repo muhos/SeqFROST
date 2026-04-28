@@ -5,7 +5,9 @@
 SeqFROST stands for Sequential Formal ReasOning about SaTisfiability. 
 It is a sequential SAT solver with inprocessing based on our simplifications engine in GPU SAT solver [ParaFROST](https://github.com/muhos/ParaFROST). Unlike ParaFROST, this solver runs completely single-threaded on the CPU with different solving heuristics. SeqFROST also won the first place in Main Track of SAT Competition 2022 on SAT instances.
 
-# Install
+---
+
+## Install
 
 To install, use the `install.sh` script which has the following usage:
 
@@ -31,12 +33,16 @@ To install, use the `install.sh` script which has the following usage:
 
 The `seqfrost` binary and the library `libseqfrost.a` will be created by default in the build directory.<br>
 
-## Debug and Testing
+### Debug and Testing
 Add `-t` argument with the install command to enable assertions or `-d` to collect debugging information.<br>
+
+---
 
 ## Usage
 The solver can be used via the command `seqfrost [<infile>.<cnf>][<option> ...]`.<br>
 For more options, type `seqfrost -h` or `seqfrost --helpmore`.
 
-# Incremental Solving
+---
+
+## Incremental Solving
 SeqFROST supports incremental solving to `add`/`remove` variables or clauses incrementally while solving with assumptions if needed. Thus, the solver can be integrated to any SAT-based bounded model checker.
